@@ -1,6 +1,7 @@
 package com.mycompany.papeleria;
 
 public class Producto {
+
     private String codigo;
     private String nombre;
     private int stock;
@@ -12,9 +13,9 @@ public class Producto {
         this.stock = stock;
         this.precio = precio;
     }
+
     public Producto() {
     }
-    
 
     public String getCodigo() {
         return codigo;
@@ -37,7 +38,11 @@ public class Producto {
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        if (stock >= 0) {
+            this.stock = stock;
+        } else {
+            System.out.println("El stock no puede ser menor a 0");
+        }
     }
 
     public double getPrecio() {
