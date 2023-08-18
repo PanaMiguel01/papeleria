@@ -11,8 +11,7 @@ public class Papeleria {
         int tam = 0;
         Producto[] inventario = new Producto[tam];
         int a = 0;
-                                        int aa = 0;
-        String codigo;
+        int codigo;
         String nombre;
         int cantidad;
         double precio;
@@ -49,14 +48,14 @@ public class Papeleria {
 
                                 System.out.println("\n Ingrese los datos del producto");
                                 do {
-                                    System.out.println("Código:");
-                                    codigo = scanner.next();
+                                    System.out.println("Código (numerico):");
+                                    codigo = scanner.nextInt();
 
                                     codigoRepetido = false;
 
                                     // Verificar si el código ya existe en el inventario
                                     for (Producto productoExistente : inventario) {
-                                        if (productoExistente != null && productoExistente.getCodigo().equals(codigo)) {
+                                        if (productoExistente != null && productoExistente.getCodigo() == codigo) {
                                             System.out.println("El código ya existe en el inventario Ingrese un código diferente.");
                                             codigoRepetido = true;
                                             break;
@@ -82,7 +81,7 @@ public class Papeleria {
                             tam = newtam;
                             break;
                         case 2:
-                            String opcion;
+                            int opcion;
                             int opcion2;
                             boolean codigoVerificar;
                             System.out.println("Escriba el codigo del producto que desea vender");
@@ -93,12 +92,12 @@ public class Papeleria {
                                 System.out.println("Precio unitario: " + producto.getPrecio());
                                 System.out.println("--------------------------------");
                             }
-                            opcion = scanner.next();
+                            opcion = scanner.nextInt();
                             codigoVerificar = false;
 
                             // Verificar si el código ya existe en el inventario
                             for (Producto productoExistente : inventario) {
-                                if (productoExistente != null && productoExistente.getCodigo().equals(opcion)) {
+                                if (productoExistente != null && productoExistente.getCodigo() == opcion) {
                                     codigoVerificar = true;
 
                                     System.out.println("Producto " + productoExistente.getNombre() + " encontrado)");
@@ -131,15 +130,16 @@ public class Papeleria {
                                 System.out.println("--------------------------------");
                             }
                             do {
-                                codigo = scanner.next();
+                                codigo = scanner.nextInt();
                                 codigoVerificado = false;
 
                                 // Verificar si el código ya existe en el inventario
                                 for (Producto productoExistente : inventario) {
-                                    if (productoExistente != null && productoExistente.getCodigo().equals(codigo)) {
+                                    if (productoExistente != null && productoExistente.getCodigo() == codigo) {
                                         System.out.println("El código existe en el inventario. Que desea cambiar.");
                                         codigoVerificado = true;
-                                        while (aa < 4) {
+                                        int aa = 0;
+                                        while (aa != 4) {
                                             System.out.println("1. Nombre");
                                             System.out.println("2. Cantidad");
                                             System.out.println("3. Precio unitario");
@@ -154,13 +154,17 @@ public class Papeleria {
                                                     productoExistente.setNombre(nombre);
                                                     break;
                                                 case 2:
-                                                    int sum = 0;
+                                                    int sum = productoExistente.getStock();
                                                     System.out.println("Ingrese la cantidad que desea agregar o eliminar");
                                                     cantidad = scanner.nextInt();
 
-                                                    if (productoExistente.getStock() + (cantidad) < 0) {
-                                                        sum = productoExistente.getStock();
+                                                    if (productoExistente.getStock() + (cantidad) >= 0) {
                                                         productoExistente.setStock(sum + (cantidad));
+
+                                                        System.out.println("El stock ha sido cambiado con exito");
+
+                                                    } else {
+                                                        System.out.println("El stock del producto no puede ser menor a 0");
                                                     }
 
                                                     break;
@@ -168,6 +172,11 @@ public class Papeleria {
                                                     System.out.println("Ingrese el nuevo precio");
                                                     precio = scanner.nextDouble();
                                                     productoExistente.setPrecio(precio);
+                                                    break;
+                                                case 4:
+                                                    break;
+                                                default:
+                                                    System.out.println("Opcion invalida");
                                                     break;
                                             }
                                         }
@@ -177,7 +186,7 @@ public class Papeleria {
                                     System.out.println("El codigo no existe, pruebe de nuevo");
                                 }
 
-                            } while (codigoVerificado);
+                            } while (!codigoVerificado);
                             break;
                         case 4:
                             System.out.println("Inventario:");
