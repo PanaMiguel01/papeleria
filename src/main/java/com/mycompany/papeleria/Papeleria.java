@@ -1,6 +1,4 @@
 package com.mycompany.papeleria;
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Papeleria {
@@ -20,7 +18,7 @@ public class Papeleria {
         while (a < 5) {
             do {
 
-                System.out.println("\n ----Menu----");
+                System.out.println("\n ----Menu Inventario----");
                 System.out.println("\n 1. Agregar");
                 System.out.println("\n 2. Vender");
                 System.out.println("\n 3. Cambiar informacion");
@@ -100,7 +98,7 @@ public class Papeleria {
                                 if (productoExistente != null && productoExistente.getCodigo() == opcion) {
                                     codigoVerificar = true;
 
-                                    System.out.println("Producto " + productoExistente.getNombre() + " encontrado)");
+                                    System.out.println("Producto " + productoExistente.getNombre() + " encontrado");
                                     System.out.println("Cuantos elementos desea vender.");
                                     opcion2 = scanner.nextInt();
 
